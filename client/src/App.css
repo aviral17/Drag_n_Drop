@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  /* @apply bg-black text-white box-border; */
+  /* @apply bg-[#0a0a0a] text-white box-border; */
+  /* @apply bg-[#000000a8] text-white box-border; */
+  @apply bg-[#60436e] text-white box-border;
+}
+
+::-webkit-scrollbar {
+  /* width: 4px; */
+  width: 7px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 8px;
+  width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-[#000000fe] rounded-xl;
+}
