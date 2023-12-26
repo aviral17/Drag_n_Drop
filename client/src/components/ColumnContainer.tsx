@@ -62,7 +62,7 @@ function ColumnContainer({
       bg-columnBackgroundColor
       opacity-40
       border-2
-      border-pink-500
+      border-rose-500
       w-[350px]
       h-[500px]
       max-h-[500px]
@@ -87,12 +87,15 @@ function ColumnContainer({
   max-h-[500px]
   rounded-md
   rounded-b-3xl
+  rounded-t-3xl
   flex
   flex-col
   "
     >
       {/* Column title */}
       {/* #NOTE: TOP Column style  */}
+      {/* border-columnBackgroundColor
+      border-4 rounded-2xl */}
       <div
         {...attributes}
         {...listeners}
@@ -104,12 +107,10 @@ function ColumnContainer({
       text-md
       h-[60px]
       cursor-grab
-      rounded-2xl
       rounded-b-none
       p-3
       font-bold
-      border-columnBackgroundColor
-      border-4
+      rounded-3xl
       flex
       items-center
       justify-between
@@ -122,13 +123,14 @@ function ColumnContainer({
         justify-center
         items-center
         bg-columnBackgroundColor
-        px-2
+        px-4
         py-1
         text-sm
         rounded-full
         "
           >
-            {/* NOTE: Counter task */}0
+            {/* NOTE: Counter task */}
+            {tasks.filter((task) => task.columnId === column.id).length}
           </div>
           {!editMode && column.title}
           {editMode && (
@@ -180,7 +182,7 @@ function ColumnContainer({
       {/* Column footer */}
       {/* hover:bg-mainBackgroundColor  rounded-md inside button */}
       <button
-        className="flex gap-2 items-center border-columnBackgroundColor border-2 rounded-full  p-4 border-x-columnBackgroundColor hover:bg-[#000000e1] hover:text-[#ffffffb3] active:bg-black"
+        className="flex gap-2 items-center border-columnBackgroundColor border-2 rounded-3xl  p-2 mb-1 mt-2 mx-1 border-x-columnBackgroundColor hover:bg-[#080808] opacity-60 hover:opacity-100 hover:text-[#ffffff] active:bg-black"
         onClick={() => {
           createTask(column.id);
         }}

@@ -1,5 +1,5 @@
 import PlusIcon from "../icons/PlusIcon";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Column, Id, Task } from "../types";
 import ColumnContainer from "./ColumnContainer";
 import {
@@ -16,120 +16,95 @@ import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import { createPortal } from "react-dom";
 import TaskCard from "./TaskCard";
 
-// const defaultCols: Column[] = [
-//   {
-//     id: "todo",
-//     title: "Todo",
-//   },
-//   {
-//     id: "doing",
-//     title: "Work in progress",
-//   },
-//   {
-//     id: "done",
-//     title: "Done",
-//   },
-// ];
+const defaultCols: Column[] = [
+  {
+    id: "todo",
+    title: "Todo",
+  },
+  {
+    id: "doing",
+    title: "Work in progress",
+  },
+  {
+    id: "done",
+    title: "Done",
+  },
+];
 
-// const defaultTasks: Task[] = [
-//   {
-//     id: "1",
-//     columnId: "todo",
-//     content: "List admin APIs for dashboard",
-//   },
-//   {
-//     id: "2",
-//     columnId: "todo",
-//     content:
-//       "Develop user registration functionality with OTP delivered on SMS after email confirmation and phone number confirmation",
-//   },
-//   {
-//     id: "3",
-//     columnId: "doing",
-//     content: "Conduct security testing",
-//   },
-//   {
-//     id: "4",
-//     columnId: "doing",
-//     content: "Analyze competitors",
-//   },
-//   {
-//     id: "5",
-//     columnId: "done",
-//     content: "Create UI kit documentation",
-//   },
-//   {
-//     id: "6",
-//     columnId: "done",
-//     content: "Dev meeting",
-//   },
-//   {
-//     id: "7",
-//     columnId: "done",
-//     content: "Deliver dashboard prototype",
-//   },
-//   {
-//     id: "8",
-//     columnId: "todo",
-//     content: "Optimize application performance",
-//   },
-//   {
-//     id: "9",
-//     columnId: "todo",
-//     content: "Implement data validation",
-//   },
-//   {
-//     id: "10",
-//     columnId: "todo",
-//     content: "Design database schema",
-//   },
-//   {
-//     id: "11",
-//     columnId: "todo",
-//     content: "Integrate SSL web certificates into workflow",
-//   },
-//   {
-//     id: "12",
-//     columnId: "doing",
-//     content: "Implement error logging and monitoring",
-//   },
-//   {
-//     id: "13",
-//     columnId: "doing",
-//     content: "Design and implement responsive UI",
-//   },
-// ];
+const defaultTasks: Task[] = [
+  {
+    id: "1",
+    columnId: "todo",
+    content: "List admin APIs for dashboard",
+  },
+  {
+    id: "2",
+    columnId: "todo",
+    content:
+      "Develop user registration functionality with OTP delivered on SMS after email confirmation and phone number confirmation",
+  },
+  {
+    id: "3",
+    columnId: "doing",
+    content: "Conduct security testing",
+  },
+  {
+    id: "4",
+    columnId: "doing",
+    content: "Analyze competitors",
+  },
+  {
+    id: "5",
+    columnId: "done",
+    content: "Create UI kit documentation",
+  },
+  {
+    id: "6",
+    columnId: "done",
+    content: "Dev meeting",
+  },
+  {
+    id: "7",
+    columnId: "done",
+    content: "Deliver dashboard prototype",
+  },
+  {
+    id: "8",
+    columnId: "todo",
+    content: "Optimize application performance",
+  },
+  {
+    id: "9",
+    columnId: "todo",
+    content: "Implement data validation",
+  },
+  {
+    id: "10",
+    columnId: "todo",
+    content: "Design database schema",
+  },
+  {
+    id: "11",
+    columnId: "todo",
+    content: "Integrate SSL web certificates into workflow",
+  },
+  {
+    id: "12",
+    columnId: "doing",
+    content: "Implement error logging and monitoring",
+  },
+  {
+    id: "13",
+    columnId: "doing",
+    content: "Design and implement responsive UI",
+  },
+];
 
 function KanbanBoard() {
-  /* ############################################################################################ */
-
-  // Load tasks and columns from local storage when component mounts
-  const [tasks, setTasks] = useState<Task[]>(() => {
-    try {
-      const savedTasks = localStorage.getItem("tasks");
-      return savedTasks ? JSON.parse(savedTasks) : [];
-    } catch (error) {
-      console.error("Failed to parse tasks from local storage:", error);
-      return [];
-    }
-  });
-
-  const [columns, setColumns] = useState<Column[]>(() => {
-    try {
-      const savedColumns = localStorage.getItem("columns");
-      return savedColumns ? JSON.parse(savedColumns) : [];
-    } catch (error) {
-      console.error("Failed to parse columns from local storage:", error);
-      return [];
-    }
-  });
-
-  /* ############################################################################################ */
-
-  // const [columns, setColumns] = useState<Column[]>(defaultCols);
+  const [columns, setColumns] = useState<Column[]>(defaultCols);
   const columnsId = useMemo(() => columns.map((col) => col.id), [columns]);
 
-  // const [tasks, setTasks] = useState<Task[]>(defaultTasks);
+  const [tasks, setTasks] = useState<Task[]>(defaultTasks);
 
   const [activeColumn, setActiveColumn] = useState<Column | null>(null);
 
@@ -142,18 +117,6 @@ function KanbanBoard() {
       },
     })
   );
-
-  // Save tasks and columns to local storage whenever they change
-  useEffect(() => {
-    try {
-      localStorage.setItem("tasks", JSON.stringify(tasks));
-      localStorage.setItem("columns", JSON.stringify(columns));
-    } catch (error) {
-      console.error("Failed to save tasks or columns to local storage:", error);
-    }
-    console.log("Active Task ==", activeTask);
-    console.log("Active Column ==", activeColumn);
-  }, [tasks, columns]);
 
   return (
     <div
@@ -256,21 +219,24 @@ function KanbanBoard() {
     const newTask: Task = {
       id: generateId(),
       columnId,
-      // content: `Task ${tasks.length + 1}`,
-      content: ``,
+      content: `Task ${tasks.length + 1}`,
     };
 
-    setTasks((prevTasks) => [...prevTasks, newTask]);
+    setTasks([...tasks, newTask]);
   }
 
   function deleteTask(id: Id) {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    const newTasks = tasks.filter((task) => task.id !== id);
+    setTasks(newTasks);
   }
 
   function updateTask(id: Id, content: string) {
-    setTasks((prevTasks) =>
-      prevTasks.map((task) => (task.id === id ? { ...task, content } : task))
-    );
+    const newTasks = tasks.map((task) => {
+      if (task.id !== id) return task;
+      return { ...task, content };
+    });
+
+    setTasks(newTasks);
   }
 
   function createNewColumn() {
@@ -279,19 +245,24 @@ function KanbanBoard() {
       title: `Column ${columns.length + 1}`,
     };
 
-    setColumns((prevColumns) => [...prevColumns, columnToAdd]);
+    setColumns([...columns, columnToAdd]);
   }
 
   function deleteColumn(id: Id) {
-    setColumns((prevColumns) => prevColumns.filter((col) => col.id !== id));
+    const filteredColumns = columns.filter((col) => col.id !== id);
+    setColumns(filteredColumns);
 
-    setTasks((prevTasks) => prevTasks.filter((task) => task.columnId !== id));
+    const newTasks = tasks.filter((t) => t.columnId !== id);
+    setTasks(newTasks);
   }
 
   function updateColumn(id: Id, title: string) {
-    setColumns((prevColumns) =>
-      prevColumns.map((col) => (col.id === id ? { ...col, title } : col))
-    );
+    const newColumns = columns.map((col) => {
+      if (col.id !== id) return col;
+      return { ...col, title };
+    });
+
+    setColumns(newColumns);
   }
 
   function onDragStart(event: DragStartEvent) {
