@@ -6,6 +6,8 @@ import { useMemo, useState } from "react";
 import PlusIcon from "../icons/PlusIcon";
 import TaskCard from "./TaskCard";
 
+// update its UI
+
 interface Props {
   column: Column;
   deleteColumn: (id: Id) => void;
