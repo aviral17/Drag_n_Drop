@@ -3,6 +3,7 @@
 import "./App.css";
 import KanbanBoard from "./components/KanbanBoard";
 
+// update functions
 function App() {
   return <KanbanBoard />;
 }
