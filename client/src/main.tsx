@@ -1,5 +1,5 @@
 // change its structure
-// update the functions
+// updated the functions
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
