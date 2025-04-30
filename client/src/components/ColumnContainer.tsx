@@ -168,7 +168,7 @@ function ColumnContainer({
         </button>
       </div>
 
-{/*       updated its task container */}
+{/*       update its task container */}
       {/* Column task container */}
       <div className="flex flex-grow flex-col gap-4 p-2 overflow-x-hidden overflow-y-auto">
         <SortableContext items={tasksIds}>
