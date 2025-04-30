@@ -1,4 +1,4 @@
-// changed its structure
+// change its structure
 // update the functions
 
 import React from 'react'
