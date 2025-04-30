@@ -1,4 +1,4 @@
-// updated it as per current methodologies
+// update it as per current methodologies
 
 import "./App.css";
 import KanbanBoard from "./components/KanbanBoard";
